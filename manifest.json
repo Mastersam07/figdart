@@ -1,0 +1,18 @@
+{
+  "name": "FigDart",
+  "id": "1282135889870206898",
+  "api": "1.0.0",
+  "main": "src/main.js",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "editorType": [
+    "figma",
+    "figjam"
+  ],
+  "ui": "src/ui.html",
+  "networkAccess": {
+    "allowedDomains": [
+      "none"
+    ]
+  }
+}

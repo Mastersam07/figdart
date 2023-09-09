@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Generate Dart Code</title>
+  <style>
+    /* #output {
+      cursor: pointer;
+      border: 2px solid #828282;
+      border-radius: 8px;
+      padding: 10px;
+    } */
+
+    #codeBlock {
+      height: 335px;
+      overflow: auto;
+      border: 2px solid #828282;
+      border-radius: 4px;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Style Generator For Flutter</h2>
+  <fieldset>
+    <legend>TextStyle Options:</legend>
+    <p>
+      <label>
+        <input type="checkbox" id="useThemeExtensions" />
+        Use Theme Extensions
+      </label>
+    </p>
+    <p>
+      <label>
+        <input type="checkbox" id="includeFontName" />
+        Include font name
+      </label>
+    </p>
+  </fieldset>
+  <p>
+    <button id="generateCode">Generate TextStyles</button>
+  </p>
+
+
+
+  <!-- <div id="output"> -->
+  <pre id="codeBlock">No code generated yet.</pre>
+  <!-- </div> -->
+  <script>
+    // Logic for button click and checkbox state
+    document.getElementById('generateCode').onclick = () => {
+      const useThemeExtensions = document.getElementById('useThemeExtensions').checked;
+      const includeFontName = document.getElementById('includeFontName').checked;
+      window.parent.postMessage({ pluginMessage: { type: 'generate-textstyles', useThemeExtensions: useThemeExtensions, includeFontName: includeFontName } }, '*');
+    };
+
+    window.onmessage = (event) => {
+      console.log(event.data.pluginMessage.type)
+      if (event.data.pluginMessage.type === 'dart-code') {
+        document.getElementById('codeBlock').textContent = event.data.pluginMessage.code;
+      }
+    };
+
+    // Function to copy text inside the <pre> tag to clipboard
+    function copyToClipboard() {
+      const text = document.getElementById('codeBlock').innerText;
+      try {
+        navigator.clipboard.writeText(text).then(() => {
+          alert('Copied to clipboard');
+        });
+      } catch (err) {
+        alert('Failed to copy text: ', err);
+      }
+    }
+
+  </script>
+</body>
+
+</html>
