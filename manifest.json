@@ -3,11 +3,12 @@
   "id": "1282135889870206898",
   "api": "1.0.0",
   "main": "src/main.js",
-  "capabilities": [],
+  "capabilities": ["inspect"],
   "enableProposedApi": false,
   "editorType": [
     "figma",
-    "figjam"
+    "figjam",
+    "dev"
   ],
   "ui": "src/ui.html",
   "networkAccess": {
