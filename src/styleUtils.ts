@@ -14,7 +14,7 @@ function extractTextStyleProperties(style: any) {
   // Format style name
 function formatStyleName(name: string): string {
     // Remove the part before and including the slash
-    const partsAfterSlash = name.split('/')[1] || '';
+    const partsAfterSlash = name.split('/')[1] || name;
   
     // Remove spaces and dashes, and make the first letter of each word uppercase
     const camelCase = partsAfterSlash
