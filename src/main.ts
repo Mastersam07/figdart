@@ -1,4 +1,4 @@
-if (figma.editorType === 'figma' || figma.editorType === 'dev' || figma.editorType === 'figjam') {
+if (figma.editorType === 'figma' || figma.editorType === 'dev') {
     figma.showUI(__html__, { width: 600, height: 600 });
 
     figma.ui.onmessage = msg => {

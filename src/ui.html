@@ -57,7 +57,6 @@
     };
 
     window.onmessage = (event) => {
-      console.log(event.data.pluginMessage.type)
       if (event.data.pluginMessage.type === 'dart-code') {
         document.getElementById('codeBlock').textContent = event.data.pluginMessage.code;
       }
