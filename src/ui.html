@@ -40,7 +40,7 @@
     </p>
   </fieldset>
   <p>
-    <button id="generateCode">Generate TextStyles</button>
+    <button id="generateTextStyles">Generate TextStyles</button> <button id="generateColors">Generate Colors</button>
   </p>
 
 
@@ -50,10 +50,14 @@
   <!-- </div> -->
   <script>
     // Logic for button click and checkbox state
-    document.getElementById('generateCode').onclick = () => {
+    document.getElementById('generateTextStyles').onclick = () => {
       const useThemeExtensions = document.getElementById('useThemeExtensions').checked;
       const includeFontName = document.getElementById('includeFontName').checked;
       window.parent.postMessage({ pluginMessage: { type: 'generate-textstyles', useThemeExtensions: useThemeExtensions, includeFontName: includeFontName } }, '*');
+    };
+
+    document.getElementById('generateColors').onclick = () => {
+      window.parent.postMessage({ pluginMessage: { type: 'generate-colors' } }, '*');
     };
 
     window.onmessage = (event) => {

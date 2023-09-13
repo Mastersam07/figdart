@@ -22,3 +22,16 @@ function mapTextDecorationToDart(decoration: string): string {
     };
     return map.hasOwnProperty(decoration.toLowerCase()) ? map[decoration.toLowerCase()] : 'TextDecoration.none';
 }
+
+function formatColorName(name: string): string {
+    return name.split('/')
+      .join(' ') // Replace slashes with spaces
+      .replace(/[^\w\s]/g, '') // Remove all non-alphanumeric characters
+      .split(' ') // Split by space to get individual words
+      .map((word, index) => index === 0 ? word.toLowerCase() : capitalizeFirstLetter(word.toLowerCase())) // Capitalize each word, but keep the first one in lowercase
+      .join('');
+  }
+  
+  function capitalizeFirstLetter(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
