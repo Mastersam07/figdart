@@ -12,16 +12,18 @@ function extractTextStyleProperties(style: any) {
   }
 
   // Format style name
-function formatStyleName(name: string): string {
-    // Remove the part before and including the slash
-    const partsAfterSlash = name.split('/')[1] || name;
-  
-    // Remove spaces and dashes, and make the first letter of each word uppercase
-    const camelCase = partsAfterSlash
-      .split(/[\s-]/)
-      .map(part => part.charAt(0).toUpperCase() + part.slice(1))
-      .join('');
-  
-    // Make the first letter lowercase
+  function formatStyleName(name: string): string {
+    // Split the name by slash and map each part to CamelCase
+    const camelCase = name
+        .split('/')
+        .map(part => 
+            part
+            .split(/[\s-]/)
+            .map(subPart => subPart.charAt(0).toUpperCase() + subPart.slice(1))
+            .join('')
+        )
+        .join('');
+    
+    // Make the first letter lowercase and return
     return camelCase.charAt(0).toLowerCase() + camelCase.slice(1);
-  }
+}
