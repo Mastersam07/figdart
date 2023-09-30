@@ -44,10 +44,14 @@ function generateTextStyles(useThemeExtensions: boolean, includeFontName: boolea
                 }
 
                 if (lineHeightValue !== 'null') {
-                    dartCode += `          height: ${lineHeightValue} / ${fontSize},\n`;
+                    const height = Math.round((lineHeightValue / fontSize) * 100) / 100;
+                    dartCode += `          height: ${height},\n`;
                 }
 
-                dartCode += `          letterSpacing: ${letterSpacing},\n`;
+                if (letterSpacing != null && letterSpacing !== 'null' && letterSpacing !== 0) {
+                    const roundedLetterSpacing = Math.round((letterSpacing * fontSize / 100) * 100) / 100;
+                    dartCode += `          letterSpacing: ${roundedLetterSpacing},\n`;
+                }
                 dartCode += `          fontStyle: ${fontStyle},\n`;
                 dartCode += `          decoration: ${textDecoration},\n`;
                 dartCode += `        ),\n`;
@@ -121,7 +125,7 @@ function generateColors(): string {
     try {
         const localColorStyles = figma.getLocalPaintStyles();
         let dartCode = "import 'package:flutter/material.dart';\n\n";
-         dartCode += 'abstract class AppColors {\n';
+        dartCode += 'abstract class AppColors {\n';
 
         for (const style of localColorStyles) {
             const paint = style.paints[0]; // assuming the first paint is what you want
@@ -135,7 +139,7 @@ function generateColors(): string {
             } else if (paint.type === 'GRADIENT_LINEAR') {
                 // Assuming stops is an array of color stop objects containing color and position
                 const stops = paint.gradientStops.map(stop => {
-                    const {r, g, b} = stop.color;
+                    const { r, g, b } = stop.color;
                     const a = 1;
                     return `Color(0x${toHex(a)}${toHex(r)}${toHex(g)}${toHex(b)})`;
                 }).join(', ');
@@ -166,10 +170,14 @@ function generateTextStyleDartCode(
     }
 
     if (lineHeightValue !== 'null') {
-        code += `    height: ${lineHeightValue} / ${fontSize},\n`;
+        const height = Math.round((lineHeightValue / fontSize) * 100) / 100;
+        code += `    height: ${height},\n`;
     }
 
-    code += `    letterSpacing: ${letterSpacing},\n`;
+    if (letterSpacing != null && letterSpacing !== 'null' && letterSpacing !== 0) {
+        const roundedLetterSpacing = Math.round((letterSpacing * fontSize / 100) * 100) / 100;
+        code += `    letterSpacing: ${roundedLetterSpacing},\n`;
+    }
     code += `    fontStyle: ${fontStyle},\n`;
     code += `    decoration: ${textDecoration},\n`;
     code += `  );\n\n`;
@@ -193,7 +201,7 @@ function generateColorStyleDartCode(styleName: string, r: number, g: number, b: 
 
 function toHex(channel: number): string {
     return padStart(Math.floor(channel * 255).toString(16), 2, '0');
-  }
+}
 
 function padStart(str: string, maxLength: number, fillString: string = ' '): string {
     if (str.length >= maxLength) {
