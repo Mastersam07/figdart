@@ -12,7 +12,8 @@ function extractTextStyleProperties(style: any) {
 }
 
 // Format style name
-function formatStyleName(name: string): string {
+function formatStyleName(name: string, index: number): string {
+  if (!name) return `textStyle${index+1}`;
   // Split the name by slash and map each part to CamelCase
   const camelCase = name
     .split('/')

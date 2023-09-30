@@ -8,22 +8,22 @@ function generateTextStyles(useThemeExtensions: boolean, includeFontName: boolea
             dartCode += "@immutable\nclass AppTextTheme extends ThemeExtension<AppTextTheme> {\n";
 
             // Generate fields
-            textStyles.forEach((style) => {
-                const formattedStyleName = formatStyleName(style.name);
+            textStyles.forEach((style, index) => {
+                const formattedStyleName = formatStyleName(style.name, index);
                 dartCode += `  final TextStyle? ${formattedStyleName};\n`;
             });
 
             // Generate constructor
             dartCode += "\n   const AppTextTheme({\n";
-            textStyles.forEach((style) => {
-                const formattedStyleName = formatStyleName(style.name);
+            textStyles.forEach((style, index) => {
+                const formattedStyleName = formatStyleName(style.name, index);
                 dartCode += `    this.${formattedStyleName},\n`;
             });
             dartCode += "  });\n\n";
 
             // Generate fallback constructor
             dartCode += "  const AppTextTheme.fallback()\n      : this(\n";
-            textStyles.forEach((style) => {
+            textStyles.forEach((style, index) => {
                 const {
                     fontSize,
                     fontStyle,
@@ -33,7 +33,7 @@ function generateTextStyles(useThemeExtensions: boolean, includeFontName: boolea
                     fontFamily,
                     lineHeightValue
                 } = extractTextStyleProperties(style);
-                const formattedStyleName = formatStyleName(style.name);
+                const formattedStyleName = formatStyleName(style.name, index);
 
                 dartCode += `        ${formattedStyleName}: const TextStyle(\n`;
                 dartCode += `          fontSize: ${fontSize},\n`;
@@ -60,13 +60,13 @@ function generateTextStyles(useThemeExtensions: boolean, includeFontName: boolea
 
             // Generate copyWith method
             dartCode += "  @override\n  AppTextTheme copyWith({\n";
-            textStyles.forEach((style) => {
-                const formattedStyleName = formatStyleName(style.name);
+            textStyles.forEach((style, index) => {
+                const formattedStyleName = formatStyleName(style.name, index);
                 dartCode += `    TextStyle? ${formattedStyleName},\n`;
             });
             dartCode += "  }) {\n    return AppTextTheme(\n";
-            textStyles.forEach((style) => {
-                const formattedStyleName = formatStyleName(style.name);
+            textStyles.forEach((style, index) => {
+                const formattedStyleName = formatStyleName(style.name, index);
                 dartCode += `      ${formattedStyleName}: ${formattedStyleName} ?? this.${formattedStyleName},\n`;
             });
             dartCode += "    );\n  }\n\n";
@@ -75,8 +75,8 @@ function generateTextStyles(useThemeExtensions: boolean, includeFontName: boolea
             dartCode += "  @override\n  AppTextTheme lerp(AppTextTheme? other, double t) {\n";
             dartCode += "    if (other is! AppTextTheme) return this;\n";
             dartCode += "    return AppTextTheme(\n";
-            textStyles.forEach((style) => {
-                const formattedStyleName = formatStyleName(style.name);
+            textStyles.forEach((style, index) => {
+                const formattedStyleName = formatStyleName(style.name, index);
                 dartCode += `      ${formattedStyleName}: TextStyle.lerp(${formattedStyleName}, other.${formattedStyleName}, t),\n`;
             });
             dartCode += "    );\n  }\n";
@@ -84,8 +84,8 @@ function generateTextStyles(useThemeExtensions: boolean, includeFontName: boolea
         } else {
             // Original TextStyles class
             dartCode += "abstract class AppTextStyles {\n";
-            textStyles.forEach((style) => {
-                const formattedStyleName = formatStyleName(style.name);
+            textStyles.forEach((style, index) => {
+                const formattedStyleName = formatStyleName(style.name, index);
                 const {
                     fontSize,
                     fontStyle,
