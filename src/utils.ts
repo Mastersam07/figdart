@@ -29,7 +29,7 @@ function formatColorName(name: string, index: number): string {
         .replace(/[^a-zA-Z0-9 ]/g, ' ') // Remove all non-alphanumeric characters and replace with space
         .trim() // Remove leading and trailing spaces
         .split(/\s+/); // Split by one or more spaces
-    return words.map((word, index) => index === 0 ? word.toLowerCase() : capitalizeFirstLetter(word.toLowerCase())).join('');
+    return words.map((word, index) => index === 0 ? word.toLowerCase() : capitalizeFirstLetter(word)).join('');
 }
 
 function formatEffectStyleName(name: string, index: number): string {
@@ -38,7 +38,7 @@ function formatEffectStyleName(name: string, index: number): string {
         .replace(/[^a-zA-Z0-9 ]/g, ' ') // Remove all non-alphanumeric characters and replace with space
         .trim() // Remove leading and trailing spaces
         .split(/\s+/); // Split by one or more spaces
-    return words.map((word, index) => index === 0 ? word.toLowerCase() : word.charAt(0).toUpperCase() + word.slice(1)).join('');
+    return words.map((word, index) => index === 0 ? word.toLowerCase() : capitalizeFirstLetter(word)).join('');
 }
 
 function extractTextStyleProperties(style: any) {
@@ -61,7 +61,7 @@ function formatStyleName(name: string, index: number): string {
         .replace(/[^a-zA-Z0-9 ]/g, ' ') // Remove all non-alphanumeric characters and replace with space
         .trim() // Remove leading and trailing spaces
         .split(/\s+/); // Split by one or more spaces
-    return words.map((word, index) => index === 0 ? word.toLowerCase() : word.charAt(0).toUpperCase() + word.slice(1)).join('');
+    return words.map((word, index) => index === 0 ? word.toLowerCase() : capitalizeFirstLetter(word)).join('');
 }
 
 function toHex(channel: number): string {
@@ -76,5 +76,5 @@ function padStart(str: string, maxLength: number, fillString: string = ' '): str
 }
 
 function capitalizeFirstLetter(string: string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
