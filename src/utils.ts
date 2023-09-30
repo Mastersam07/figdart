@@ -23,62 +23,46 @@ function mapTextDecorationToDart(decoration: string): string {
     return map.hasOwnProperty(decoration.toLowerCase()) ? map[decoration.toLowerCase()] : 'TextDecoration.none';
 }
 
-function formatColorName(name: string): string {
-    return name.split('/')
-        .join(' ') // Replace slashes with spaces
-        .replace(/[^\w\s]/g, '') // Remove all non-alphanumeric characters
-        .split(' ') // Split by space to get individual words
-        .map((word, index) => index === 0 ? word.toLowerCase() : capitalizeFirstLetter(word.toLowerCase())) // Capitalize each word, but keep the first one in lowercase
-        .join('');
+function formatColorName(name: string, index: number): string {
+    if (!name) return `color${index}`; // or any default name you prefer
+    const words = name
+        .replace(/[^a-zA-Z0-9 ]/g, ' ') // Remove all non-alphanumeric characters and replace with space
+        .trim() // Remove leading and trailing spaces
+        .split(/\s+/); // Split by one or more spaces
+    return words.map((word, index) => index === 0 ? word.toLowerCase() : capitalizeFirstLetter(word.toLowerCase())).join('');
 }
 
 function formatEffectStyleName(name: string, index: number): string {
     if (!name) return `effectStyle${index}`;
-    return name
-        .split('/')
-        .map(part => 
-            part
-            .replace(/[^a-zA-Z0-9]/g, ' ')
-            .split(' ')
-            .map(subPart => subPart.charAt(0).toUpperCase() + subPart.slice(1))
-            .join('')
-        )
-        .join('')
-        .replace(/^./, str => str.toLowerCase());
+    const words = name
+        .replace(/[^a-zA-Z0-9 ]/g, ' ') // Remove all non-alphanumeric characters and replace with space
+        .trim() // Remove leading and trailing spaces
+        .split(/\s+/); // Split by one or more spaces
+    return words.map((word, index) => index === 0 ? word.toLowerCase() : word.charAt(0).toUpperCase() + word.slice(1)).join('');
 }
 
 function extractTextStyleProperties(style: any) {
     return {
-      fontSize: style.fontSize,
-      fontStyle: inferFontStyleFromStyle(style.fontName.style),
-      fontWeight: inferFontWeightFromStyle(style.fontName.style),
-      decoration: style.textDecoration,
-      letterSpacing: style.letterSpacing?.value || 0,
-      fontFamily: style.fontName.family,
-      lineHeightValue: style.lineHeight?.unit !== 'AUTO' ? style.lineHeight.value : 'null',
-      textDecoration: mapTextDecorationToDart(style.textDecoration)
+        fontSize: style.fontSize,
+        fontStyle: inferFontStyleFromStyle(style.fontName.style),
+        fontWeight: inferFontWeightFromStyle(style.fontName.style),
+        decoration: style.textDecoration,
+        letterSpacing: style.letterSpacing?.value || 0,
+        fontFamily: style.fontName.family,
+        lineHeightValue: style.lineHeight?.unit !== 'AUTO' ? style.lineHeight.value : 'null',
+        textDecoration: mapTextDecorationToDart(style.textDecoration)
     };
-  }
-  
-  // Format style name
-  function formatStyleName(name: string, index: number): string {
-    if (!name) return `textStyle${index+1}`;
-    // Split the name by slash and map each part to CamelCase
-    const camelCase = name
-      .split('/')
-      .map(part =>
-        part
-          .trim() // remove leading and trailing spaces in each part
-          .replace(/[^a-zA-Z0-9\s]/g, '') // remove all non-alphanumeric characters except space
-          .split(/\s+/) // split by one or more spaces
-          .map(subPart => subPart.charAt(0).toUpperCase() + subPart.slice(1))
-          .join('')
-      )
-      .join('');
-  
-    // Make the first letter lowercase and return
-    return camelCase.charAt(0).toLowerCase() + camelCase.slice(1);
-  }
+}
+
+// Format style name
+function formatStyleName(name: string, index: number): string {
+    if (!name) return `textStyle${index}`;
+    const words = name
+        .replace(/[^a-zA-Z0-9 ]/g, ' ') // Remove all non-alphanumeric characters and replace with space
+        .trim() // Remove leading and trailing spaces
+        .split(/\s+/); // Split by one or more spaces
+    return words.map((word, index) => index === 0 ? word.toLowerCase() : word.charAt(0).toUpperCase() + word.slice(1)).join('');
+}
 
 function toHex(channel: number): string {
     return padStart(Math.floor(channel * 255).toString(16), 2, '0');

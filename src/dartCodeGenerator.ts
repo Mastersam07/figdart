@@ -135,7 +135,7 @@ function generateColors(): string {
         let dartCode = "import 'package:flutter/material.dart';\n\n";
         dartCode += 'abstract class AppColors {\n';
 
-        for (const style of localColorStyles) {
+        localColorStyles.forEach((style, index) => { // Changed to forEach to get index
             const paint = style.paints[0]; // assuming the first paint is what you want
             if (paint.type === 'SOLID') {
                 const r = paint.color.r;
@@ -143,7 +143,7 @@ function generateColors(): string {
                 const b = paint.color.b;
                 const opacity = paint.opacity || 1;
 
-                dartCode += generateColorStyleDartCode(formatColorName(style.name), r, g, b, opacity);
+                dartCode += generateColorStyleDartCode(formatColorName(style.name, index), r, g, b, opacity); // Passed index
             } else if (paint.type === 'GRADIENT_LINEAR') {
                 // Assuming stops is an array of color stop objects containing color and position
                 const stops = paint.gradientStops.map(stop => {
@@ -152,9 +152,9 @@ function generateColors(): string {
                     return `Color(0x${toHex(a)}${toHex(r)}${toHex(g)}${toHex(b)})`;
                 }).join(', ');
 
-                dartCode += `  static const ${formatColorName(style.name)} = LinearGradient(colors: [${stops}]);\n\n`;
+                dartCode += `  static const ${formatColorName(style.name, index)} = LinearGradient(colors: [${stops}]);\n\n`; // Passed index
             }
-        }
+        });
 
         dartCode += '}\n';
         return dartCode;
@@ -167,8 +167,8 @@ function generateColors(): string {
 function generateEffectStyles(): string {
     try {
         const localEffectStyles = figma.getLocalEffectStyles();
-        
-        if(localEffectStyles.length === 0) {
+
+        if (localEffectStyles.length === 0) {
             return "No defined effect styles";
         }
 
