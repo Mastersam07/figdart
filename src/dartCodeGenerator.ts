@@ -127,6 +127,11 @@ function generateTextStyles(useThemeExtensions: boolean, includeFontName: boolea
 function generateColors(): string {
     try {
         const localColorStyles = figma.getLocalPaintStyles();
+
+        if (localColorStyles.length === 0) {
+            return "No defined colors";
+        }
+
         let dartCode = "import 'package:flutter/material.dart';\n\n";
         dartCode += 'abstract class AppColors {\n';
 
