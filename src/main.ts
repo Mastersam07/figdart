@@ -13,5 +13,10 @@ if (figma.editorType === 'figma' || figma.editorType === 'dev') {
             let dartCode = generateColors();
             figma.ui.postMessage({ type: 'dart-code', code: dartCode });
         }
+
+        if (msg.type === 'generate-effects') {
+            let dartCode = generateEffectStyles();
+            figma.ui.postMessage({ type: 'dart-code', code: dartCode });
+        }
     };
 }

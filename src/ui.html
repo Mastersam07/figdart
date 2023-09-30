@@ -40,7 +40,7 @@
     </p>
   </fieldset>
   <p>
-    <button id="generateTextStyles">Generate TextStyles</button> <button id="generateColors">Generate Colors</button>
+    <button id="generateTextStyles">Generate TextStyles</button> <button id="generateColors">Generate Colors</button> <button id="generateEffects">Generate Effects</button>
   </p>
 
 
@@ -58,6 +58,10 @@
 
     document.getElementById('generateColors').onclick = () => {
       window.parent.postMessage({ pluginMessage: { type: 'generate-colors' } }, '*');
+    };
+
+    document.getElementById('generateEffects').onclick = () => {
+      window.parent.postMessage({ pluginMessage: { type: 'generate-effects' } }, '*');
     };
 
     window.onmessage = (event) => {
