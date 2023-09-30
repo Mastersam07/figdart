@@ -1,6 +1,9 @@
 function generateTextStyles(useThemeExtensions: boolean, includeFontName: boolean): string {
     try {
         const textStyles = figma.getLocalTextStyles();
+        if (textStyles.length === 0) {
+            return "No defined textstyles";
+        }
         let dartCode = "import 'package:flutter/material.dart';\n\n";
 
         if (useThemeExtensions) {
