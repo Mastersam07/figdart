@@ -42,12 +42,25 @@ function formatEffectStyleName(name: string, index: number): string {
 }
 
 function extractTextStyleProperties(style: any) {
+    let letterSpacing = 0; // Default value
+    const fontSize = style.fontSize;
+
+    // Check if letterSpacing is in pixels or percent and convert accordingly
+    if (style.letterSpacing) {
+        if (style.letterSpacing.unit === 'PIXELS') {
+            letterSpacing = style.letterSpacing.value; // Use pixel value directly
+        } else if (style.letterSpacing.unit === 'PERCENT') {
+            // Convert percentage to pixels based on the fontSize
+            letterSpacing = (style.letterSpacing.value * fontSize) / 100;
+        }
+    }
+
     return {
         fontSize: style.fontSize,
         fontStyle: inferFontStyleFromStyle(style.fontName.style),
         fontWeight: inferFontWeightFromStyle(style.fontName.style),
         decoration: style.textDecoration,
-        letterSpacing: style.letterSpacing?.value || 0,
+        letterSpacing: letterSpacing || 0,
         fontFamily: style.fontName.family,
         lineHeightValue: style.lineHeight?.unit !== 'AUTO' ? style.lineHeight.value : 'null',
         textDecoration: mapTextDecorationToDart(style.textDecoration)

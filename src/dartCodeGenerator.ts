@@ -51,7 +51,7 @@ function generateTextStyles(useThemeExtensions: boolean, includeFontName: boolea
                     dartCode += `          height: ${height},\n`;
                 }
 
-                if (letterSpacing != null && letterSpacing !== 'null' && letterSpacing !== 0) {
+                if (letterSpacing != null && letterSpacing !== 0) {
                     const roundedLetterSpacing = Math.round((letterSpacing * fontSize / 100) * 100) / 100;
                     dartCode += `          letterSpacing: ${roundedLetterSpacing},\n`;
                 }
