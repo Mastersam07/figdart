@@ -58,8 +58,8 @@ You may choose to register your textstyles as a theme extension.
 You may select some other textstyle properties like font family
 
 TODO:
-- [ ] Text decoration
-- [ ] letter spacing
-- [ ] line height.
+- [x] Text decoration
+- [x] letter spacing
+- [x] line height.
 
 <img src="publish/options.png" align="center" alt="textstyle options" />
