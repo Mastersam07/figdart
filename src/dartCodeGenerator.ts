@@ -1,6 +1,6 @@
-function generateTextStyles(useThemeExtensions: boolean, includeFontName: boolean): string {
+async function generateTextStyles(useThemeExtensions: boolean, includeFontName: boolean): Promise<string> {
     try {
-        const textStyles = figma.getLocalTextStyles();
+        const textStyles = await figma.getLocalTextStylesAsync();
         if (textStyles.length === 0) {
             return "No defined textstyles";
         }
@@ -124,9 +124,9 @@ function generateTextStyles(useThemeExtensions: boolean, includeFontName: boolea
 }
 
 
-function generateColors(): string {
+async function generateColors(): Promise<string> {
     try {
-        const localColorStyles = figma.getLocalPaintStyles();
+        const localColorStyles = await figma.getLocalPaintStylesAsync();
 
         if (localColorStyles.length === 0) {
             return "No defined colors";
@@ -164,9 +164,9 @@ function generateColors(): string {
     }
 }
 
-function generateEffectStyles(): string {
+async function generateEffectStyles(): Promise<string> {
     try {
-        const localEffectStyles = figma.getLocalEffectStyles();
+        const localEffectStyles = await figma.getLocalEffectStylesAsync();
 
         if (localEffectStyles.length === 0) {
             return "No defined effect styles";

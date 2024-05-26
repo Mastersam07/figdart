@@ -3,13 +3,16 @@
   "id": "1282135889870206898",
   "api": "1.0.0",
   "main": "src/main.js",
-  "capabilities": ["inspect"],
+  "capabilities": [
+    "inspect"
+  ],
   "enableProposedApi": false,
   "editorType": [
     "figma",
     "dev"
   ],
   "ui": "src/ui.html",
+  "documentAccess": "dynamic-page",
   "networkAccess": {
     "allowedDomains": [
       "none"
