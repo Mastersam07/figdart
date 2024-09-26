@@ -2,7 +2,7 @@
   <a href="https://www.figma.com/community-free-resource-license/"><img src="https://img.shields.io/badge/figma-community_license-brightgreen?style=flat-square&logo=figma"></a>
   <a href="https://github.com/mastersam07/figdart/graphs/commit-activity"><img src="https://img.shields.io/badge/Maintained%3F-Yes-success.svg?style=flat-square"></a>
   <a href="https://github.com/mastersam07/figdart/pulls"><img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=flat-square"></a>
-  <a href="https://twitter.com/intent/tweet?text=Figdart%20is%20awesome.%20I%20use%20it%20to%20generate%20flutter%20styling%20properties%20from%20figma.%20https://github.com/kazuyaseki/figma-to-react/"><img src="https://img.shields.io/badge/Twitter-Tweet-success?style=flat-square&logo=x"></a>
+  <a href="https://twitter.com/intent/tweet?text=Figdart%20is%20awesome.%20I%20use%20it%20to%20generate%20flutter%20styling%20properties%20from%20figma.%20https://github.com/mastersam07/figdart"><img src="https://img.shields.io/badge/Twitter-Tweet-success?style=flat-square&logo=x"></a>
 </p>
 
 
